@@ -10,27 +10,37 @@ int main()
 {
     int n;
     int marks[100];
-    int i;
+    int i,flag =0;
 
     printf("Enter number of students: ");
-    scanf("%d", &n);
+    if(scanf("%d", &n) != 1) return 0;
 
     for(i = 0; i < n; i++)
     {
         printf("Enter marks: ");
         scanf("%d", &marks[i]);
+        if(0>=marks[i] != marks[i]>=100){
+          printf("%d is invalid",marks[i]);}
+          flag=1;
+          break;
     }
-
-    int sum = 0;
+if(flag!=1){
+    int sum = 0,avg;
 
     for(i = 0; i < n; i++)
     {
         sum = sum + marks[i];
     }
-
-    int avg = sum / n;
-
+    if(n!=0){
+    avg = sum / n;
+        
     printf("Average marks: %d\n", avg);
+    }
+    else{
+      printf("number of students can't be zero");
+        
+    }
 
+}
     return 0;
 }
