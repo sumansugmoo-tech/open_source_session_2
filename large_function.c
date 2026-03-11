@@ -1,58 +1,47 @@
-/*
-Hint for students:
-This function is doing too many tasks:
-->input
-->calculation
-->printing
-*/
 #include <stdio.h>
 
-void processStudentData()
-{
-    int marks[100];
+void calculateStats(int marks[], int n, int *sum, int *max, int *min) {
+    *sum = 0;
+    *max = marks[0];
+    *min = marks[0];
+
+    for (int i = 0; i < n; i++) {
+        *sum += marks[i];
+        
+        if (marks[i] > *max) {
+            *max = marks[i];
+        }
+        
+        if (marks[i] < *min) {
+            *min = marks[i];
+        }
+    }
+}
+
+int main() {
     int n;
-    int i;
-    int sum = 0;
+    int marks[100];
+    int sum, max, min;
 
-    printf("Enter number of students: ");
-    scanf("%d", &n);
+    printf("Enter number of students (1-100): ");
+    if (scanf("%d", &n) != 1 || n <= 0 || n > 100) {
+        printf("Invalid input.\n");
+        return 1;
+    }
 
-    for(i = 0; i < n; i++)
-    {
-        printf("Enter marks: ");
+    for (int i = 0; i < n; i++) {
+        printf("Enter marks for student %d: ", i + 1);
         scanf("%d", &marks[i]);
     }
 
-    for(i = 0; i < n; i++)
-    {
-        sum = sum + marks[i];
-    }
+    calculateStats(marks, n, &sum, &max, &min);
 
-    int avg = sum / n;
+    float avg = (float)sum / n;
 
-    int max = marks[0];
-    int min = marks[0];
-
-    for(i = 1; i < n; i++)
-    {
-        if(marks[i] > max)
-        {
-            max = marks[i];
-        }
-
-        if(marks[i] < min)
-        {
-            min = marks[i];
-        }
-    }
-
-    printf("Average: %d\n", avg);
+    printf("\n--- Results ---\n");
+    printf("Average: %.2f\n", avg);
     printf("Max: %d\n", max);
     printf("Min: %d\n", min);
-}
 
-int main()
-{
-    processStudentData();
     return 0;
 }
